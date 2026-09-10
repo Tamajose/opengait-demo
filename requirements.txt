@@ -1,0 +1,14 @@
+torch
+torchvision
+gradio
+plotly
+opencv-python
+pillow
+pyyaml
+tqdm
+numpy
+scipy
+tensorboard
+kornia
+einops
+scikit-learn
