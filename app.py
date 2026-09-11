@@ -36,7 +36,7 @@ def load_yaml_config(cfg_path):
     default_cfg_path = os.path.join(OPENGAIT_DIR, "configs", "default.yaml")
     if os.path.exists(default_cfg_path):
         with open(default_cfg_path, 'r', encoding='utf-8') as f:
-            dst_cfgs = yaml.safe_load(f)\
+            dst_cfgs = yaml.safe_load(f)
         def merge_dicts(src, dst):
             for k, v in src.items():
                 if k not in dst or not isinstance(v, dict):
@@ -64,6 +64,7 @@ def _load_baseline_class():
     spec = importlib.util.spec_from_file_location(
         "opengait.modeling.models.baseline", baseline_path)
     baseline_mod = importlib.util.module_from_spec(spec)
+    sys.modules["opengait.modeling.models.baseline"] = baseline_mod
     spec.loader.exec_module(baseline_mod)
     return baseline_mod.Baseline
 
@@ -76,9 +77,10 @@ except Exception as e:
         raise ImportError(f"Could not load Baseline model module: {e}")
 
 # Default checkpoint and config paths
-DEFAULT_CKPT_PATH = os.path.join(
-    CURRENT_DIR, "pretrained_casiab_gaitbase", "CASIA-B", "Baseline", "GaitBase_DA", "checkpoints", "GaitBase_DA-60000.pt"
-)
+_default_ckpt_rel = os.path.join("pretrained_casiab_gaitbase", "CASIA-B", "Baseline", "GaitBase_DA", "checkpoints", "GaitBase_DA-60000.pt")
+DEFAULT_CKPT_PATH = os.path.join(CURRENT_DIR, "weights", _default_ckpt_rel)
+if not os.path.exists(DEFAULT_CKPT_PATH):
+    DEFAULT_CKPT_PATH = os.path.join(CURRENT_DIR, _default_ckpt_rel)
 DEFAULT_CFG_PATH = os.path.join(
     OPENGAIT_DIR, "configs", "gaitbase", "gaitbase_da_casiab.yaml"
 )
