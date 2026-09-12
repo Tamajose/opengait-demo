@@ -26,13 +26,6 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-#### **On Linux / macOS**:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
 ### Step 2: Install Dependencies
 
 ```bash
@@ -43,29 +36,9 @@ pip install -r requirements.txt
 
 ## Adding Pretrained Model Weights
 
-To use a pretrained OpenGait model (e.g. `GaitBase_DA`), place the checkpoint file in the `pretrained_casiab_gaitbase` directory following this path structure:
+Download the model weights from the original repository’s releases, [OpenGait Releases](https://github.com/ShiqiYu/OpenGait/releases).
 
-### Expected Checkpoint Path:
-
-```text
-pretrained_casiab_gaitbase/CASIA-B/Baseline/GaitBase_DA/checkpoints/GaitBase_DA-60000.pt
-```
-
-### How to Configure Custom Weights or Models:
-
-If you are using a different `.pt` checkpoint file or YAML configuration, update the paths in `app.py`:
-
-```python
-# In app.py:
-DEFAULT_CKPT_PATH = os.path.join(
-    CURRENT_DIR, "pretrained_casiab_gaitbase", "CASIA-B", "Baseline", "GaitBase_DA", "checkpoints", "GaitBase_DA-60000.pt"
-)
-DEFAULT_CFG_PATH = os.path.join(
-    OPENGAIT_DIR, "configs", "gaitbase", "gaitbase_da_casiab.yaml"
-)
-```
-
-1. Place your `.pt` model checkpoint file inside the `pretrained_casiab_gaitbase` directory.
+1. Place your `.pt` model checkpoint files inside their respective directories.
 2. Ensure the matching model configuration `.yaml` file exists in `configs/`.
 
 ---

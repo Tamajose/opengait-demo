@@ -498,7 +498,7 @@ def build_app():
                 with gr.Row():
                     threshold_slider = gr.Slider(
                         minimum=-1.0, maximum=1.0, value=0.6, step=0.05,
-                        label="Verification Cosine-Similarity Threshold (Higher = Stricter)"
+                        label="Verification Threshold"
                     )
                     verify_btn = gr.Button("Compare Gait Sequences", variant="primary", scale=2)
 
